@@ -29,6 +29,14 @@ services:
       - host.docker.internal:host-gateway
     restart: unless-stopped
 
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 86400 open-webui
+    depends_on:
+      - open-webui
+
 volumes:
   ollama: {}
   open-webui: {}
